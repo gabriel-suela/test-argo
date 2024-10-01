@@ -1,0 +1,10 @@
+resources:
+  - apiVersion: v1
+    kind: Pod
+    metadata:
+      name: simple-busybox
+    spec:
+      containers:
+        - name: busybox-container
+          image: busybox:latest
+          command: ["sleep", "3600"] # Keeps the container running for an hour
