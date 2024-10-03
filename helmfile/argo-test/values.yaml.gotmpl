@@ -1,10 +1,24 @@
 resources:
-  - apiVersion: v1
-    kind: Pod
+  - apiVersion: apps/v1
+    kind: Deployment
     metadata:
-      name: simple-busybox
+      name: busybox-deployment
     spec:
-      containers:
-        - name: busybox-container
-          image: busybox:1.36.1
-          command: ["sleep", "3600"]
+      replicas: 1
+      selector:
+        matchLabels:
+          app: busybox
+      template:
+        metadata:
+          labels:
+            app: busybox
+        spec:
+          containers:
+            - name: busybox
+              image: busybox
+              command:
+                [
+                  "sh",
+                  "-c",
+                  "while true; do echo Hello, Kubernetes!; sleep 5; done",
+                ]
