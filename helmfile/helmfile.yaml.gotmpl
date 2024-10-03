@@ -9,7 +9,7 @@ environments:
     values:
       - kubeContext: gke_incentive-me-2019_us-central1-c_private-cluster
         releases:
-          test-argo:
+          argo-test:
             version: ""
             <<: *default-release
 ---
@@ -26,5 +26,5 @@ templates:
     #   # - ./{{`{{ .Release.Name }}`}}/secrets-{{ .Environment.Name }}.enc.yaml
 releases:
   - chart: bedag/raw
-    name: test-argo
+    name: argo-test
     <<: *default
