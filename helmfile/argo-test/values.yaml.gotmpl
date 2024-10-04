@@ -2,23 +2,20 @@ resources:
   - apiVersion: apps/v1
     kind: Deployment
     metadata:
-      name: busybox-deployment
+      name: guestbook-ui
     spec:
       replicas: 1
+      revisionHistoryLimit: 3
       selector:
         matchLabels:
-          app: busybox
+          app: guestbook-ui
       template:
         metadata:
           labels:
-            app: busybox
+            app: guestbook-ui
         spec:
           containers:
-            - name: busybox
-              image: busybox
-              command:
-                [
-                  "sh",
-                  "-c",
-                  "while true; do echo Hello, Kubernetes!; sleep 5; done",
-                ]
+            - image: gcr.io/heptio-images/ks-guestbook-demo:0.2
+              name: guestbook-ui
+              ports:
+                - containerPort: 80
